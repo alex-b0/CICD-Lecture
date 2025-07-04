@@ -27,3 +27,15 @@ jobs:
         with:
           name: junit-results
           path: target/surefire-reports/
+  Linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check style
+        run: mvn checkstyle:check
+        
+      - name: Archive linter results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linter-results
+          path: target/checkstyle-result.xml
