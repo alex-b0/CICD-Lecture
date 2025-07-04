@@ -29,12 +29,21 @@ jobs:
           path: target/surefire-reports/
   Linter:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [11, 17, 21]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with: 
+          distribution: 'temurin'
+          java-version: ${{ matrix.version }}
+          
       - name: check style
-        run: mvn checkstyle:check
+        run: mvn checkstyle:checkstyle
         
       - name: Archive linter results
         if: always()
@@ -42,3 +51,14 @@ jobs:
         with:
           name: linter-results
           path: target/checkstyle-result.xml
+  Konsole:
+    runs-on: ubuntu-latest
+    env:
+      Gruß: Hallo
+      
+    steps: 
+    - name: s
+      env:
+        Passwortnutzen: GitHub
+      run: echo $Gruß Nutzer, das Passwort für $Passwortnutzen ist 
+        
