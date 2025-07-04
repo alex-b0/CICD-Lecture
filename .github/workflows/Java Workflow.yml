@@ -60,5 +60,5 @@ jobs:
     - name: s
       env:
         Passwortnutzen: GitHub
-      run: echo $Gruß Nutzer, das Passwort für $Passwortnutzen ist 
+      run: echo $Gruß Nutzer, das Passwort für $Passwortnutzen ist ${{secrets.Passwort}}
         
